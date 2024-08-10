@@ -1,6 +1,8 @@
 package gaur.himanshu.flowoperators.operators.transform
 
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.runBlocking
 
 sealed class UserAction {
@@ -19,5 +21,16 @@ private val sourceFlow = flow {
 
 
 fun main() = runBlocking {
+
+    sourceFlow.transform { userAction ->
+        when (userAction) {
+            is UserAction.Click -> emit("click-> ${userAction.x} ${userAction.y}")
+            UserAction.LongPress -> emit("long press")
+            is UserAction.Swipe -> emit("swipe -> ${userAction.length}")
+        }
+    }.collectLatest {
+        println(it)
+    }
+
 
 }

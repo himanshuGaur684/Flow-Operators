@@ -1,6 +1,8 @@
 package gaur.himanshu.flowoperators.operators.transform
 
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
 
 private val sourceFlow = flow {
@@ -19,5 +21,10 @@ private val sourceFlow = flow {
 }
 
 fun main() = runBlocking {
+
+    sourceFlow.map { it*2 }
+        .collectLatest {
+            println(it)
+        }
 
 }

@@ -16,4 +16,10 @@ fun main() = runBlocking {
         emit("kotlin flow") // User types ' flow'
     }
 
+   searchQueryFlow.debounce(200)
+      .collectLatest {
+         println(it)
+      }
+
+
 }

@@ -1,5 +1,7 @@
 package gaur.himanshu.flowoperators.operators.filtering
 
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 
@@ -18,5 +20,10 @@ private val sourceFlow = flow {
 
 
 fun main() = runBlocking {
+
+    sourceFlow.distinctUntilChanged()
+        .collectLatest {
+            println(it)
+        }
 
 }
